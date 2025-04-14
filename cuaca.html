@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi Cuaca</title>
+    <link rel="stylesheet" href="cuaca.css">
+</head>
+<body>
+    <div class="container">
+        <div class="search-box">
+            <input type="text" placeholder="Masukkan nama kota" id="city-input">
+            <button onclick="checkWeather()">Cari</button>
+        </div>
+        
+        <div class="weather-info">
+            <div class="location" id="location">Jakarta, ID</div>
+            <div class="date" id="date">Senin, 14 April 2025</div>
+            
+            <div class="weather-icon">
+                <img src="/api/placeholder/120/120" alt="Weather Icon" id="weather-icon">
+            </div>
+            
+            <div class="temperature" id="temperature">28°C</div>
+            <div class="description" id="description">Cerah Berawan</div>
+            
+            <div class="details">
+                <div class="col">
+                    <img src="/api/placeholder/40/40" alt="Humidity">
+                    <div>
+                        <p class="humidity" id="humidity">80%</p>
+                        <p>Kelembaban</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <img src="/api/placeholder/40/40" alt="Wind">
+                    <div>
+                        <p class="wind" id="wind">12 km/j</p>
+                        <p>Kecepatan Angin</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="error" id="error">Kota tidak ditemukan. Silakan periksa nama kota yang dimasukkan.</div>
+    </div>
+</body>
+</html>
+<script src="cuaca.js"></script>
