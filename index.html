@@ -7,43 +7,190 @@
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <div class="container">
-        <div class="search-box">
-            <input type="text" placeholder="Masukkan nama kota" id="city-input">
-            <button onclick="checkWeather()">Cari</button>
-        </div>
-        
-        <div class="weather-info">
-            <div class="location" id="location">Jakarta, ID</div>
-            <div class="date" id="date">Senin, 14 April 2025</div>
+    <!DOCTYPE html>
+    <html lang="id">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Aplikasi Cuaca</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            }
             
-            <div class="weather-icon">
-                <img src="/api/placeholder/120/120" alt="Weather Icon" id="weather-icon">
+            body {
+                background: linear-gradient(135deg, #00b4db, #0083b0);
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: #333;
+            }
+            
+            .container {
+                width: 90%;
+                max-width: 600px;
+                background-color: rgba(255, 255, 255, 0.9);
+                padding: 30px;
+                border-radius: 20px;
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            }
+            
+            .search-box {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 30px;
+            }
+            
+            .search-box input {
+                padding: 12px 20px;
+                border: none;
+                outline: none;
+                font-size: 16px;
+                width: 70%;
+                border-radius: 25px;
+                background-color: #f5f5f5;
+            }
+            
+            .search-box button {
+                padding: 12px 20px;
+                border: none;
+                outline: none;
+                background-color: #0083b0;
+                color: white;
+                border-radius: 25px;
+                cursor: pointer;
+                font-size: 16px;
+                transition: background-color 0.3s;
+            }
+            
+            .search-box button:hover {
+                background-color: #00b4db;
+            }
+            
+            .weather-info {
+                text-align: center;
+            }
+            
+            .location {
+                font-size: 24px;
+                font-weight: bold;
+                margin-bottom: 10px;
+            }
+            
+            .date {
+                font-size: 16px;
+                color: #666;
+                margin-bottom: 30px;
+            }
+            
+            .weather-icon {
+                width: 120px;
+                margin: 0 auto;
+            }
+            
+            .temperature {
+                font-size: 46px;
+                font-weight: bold;
+                margin: 10px 0;
+            }
+            
+            .description {
+                font-size: 20px;
+                margin-bottom: 20px;
+            }
+            
+            .details {
+                display: flex;
+                justify-content: space-around;
+                margin-top: 30px;
+            }
+            
+            .col {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .col img {
+                width: 40px;
+                margin-bottom: 10px;
+            }
+            
+            .humidity, .wind {
+                font-size: 16px;
+            }
+            
+            .error {
+                display: none;
+                color: red;
+                text-align: center;
+                margin-top: 20px;
+            }
+            
+            .icon-container {
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+                width: 40px;
+                height: 40px;
+                margin-bottom: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="search-box">
+                <input type="text" placeholder="Masukkan nama kota" id="city-input">
+                <button onclick="checkWeather()">Cari</button>
             </div>
             
-            <div class="temperature" id="temperature">28°C</div>
-            <div class="description" id="description">Cerah Berawan</div>
-            
-            <div class="details">
-                <div class="col">
-                    <img src="/api/placeholder/40/40" alt="Humidity">
-                    <div>
-                        <p class="humidity" id="humidity">80%</p>
-                        <p>Kelembaban</p>
-                    </div>
+            <div class="weather-info">
+                <div class="location" id="location">Jakarta, ID</div>
+                <div class="date" id="date">Senin, 14 April 2025</div>
+                
+                <div class="weather-icon">
+                    <!-- Icon cuaca dari OpenWeatherMap -->
+                    <img src="https://openweathermap.org/img/wn/10d@2x.png" alt="Weather Icon" id="weather-icon">
                 </div>
-                <div class="col">
-                    <img src="/api/placeholder/40/40" alt="Wind">
-                    <div>
-                        <p class="wind" id="wind">12 km/j</p>
-                        <p>Kecepatan Angin</p>
+                
+                <div class="temperature" id="temperature">28°C</div>
+                <div class="description" id="description">Cerah Berawan</div>
+                
+                <div class="details">
+                    <div class="col">
+                        <!-- SVG untuk humidity -->
+                        <div class="icon-container">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#0083b0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="humidity" id="humidity">80%</p>
+                            <p>Kelembaban</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <!-- SVG untuk wind -->
+                        <div class="icon-container">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#0083b0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="wind" id="wind">12 km/j</p>
+                            <p>Kecepatan Angin</p>
+                        </div>
                     </div>
                 </div>
             </div>
+            
+            <div class="error" id="error">Kota tidak ditemukan. Silakan periksa nama kota yang dimasukkan.</div>
         </div>
-        
-        <div class="error" id="error">Kota tidak ditemukan. Silakan periksa nama kota yang dimasukkan.</div>
-    </div>
 </body>
 </html>
 <script src="index.js"></script>
