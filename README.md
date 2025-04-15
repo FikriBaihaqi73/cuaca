@@ -18,5 +18,5 @@ Aplikasi cuaca sederhana yang memberikan informasi cuaca terkini berdasarkan lok
 1. Clone repositori ini
 
    ```bash
-   git clone https://github.com/username/weather-app.git
-   cd weather-app
+   git clone https://github.com/FikriBaihaqi73/cuaca.git
+   cd cuaca.git
